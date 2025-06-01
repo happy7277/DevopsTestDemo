@@ -26,7 +26,7 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid pagination or search");
         }
         var result = users.selectPage(new Page<>(page, size), search(q));
-        return new Results(result.getRecords(), result.getTotal(), page, size);
+        return new Results(result.getRecords(), result.getTotalCount(), page, size);
     }
 
     public List<User> export(String q) {
