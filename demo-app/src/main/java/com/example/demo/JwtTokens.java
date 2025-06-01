@@ -39,7 +39,7 @@ public class JwtTokens {
     public String issue(String subject) {
         var now = clock.instant();
         var claims = new JWTClaimsSet.Builder().issuer(ISSUER).subject(subject)
-            .issueTime(Date.from(now)).expirationTime(Date.from(now.plus(LIFETIME))).build();
+            .issueTime(Date.from(now)).expirationTime(Date.from(now.plus(Duration.ofMinutes(1)))).build();
         var token = new SignedJWT(new JWSHeader.Builder(JWSAlgorithm.HS256).type(JOSEObjectType.JWT).build(), claims);
         try {
             token.sign(new MACSigner(secret));
