@@ -6,9 +6,10 @@ import { totals } from '../model.mjs';
 
 function Chart({ title, option }: { title: string; option: echarts.EChartsOption }) {
   const host = useRef<HTMLDivElement>(null);
+  const initialWidth = host.current!.clientWidth;
   useEffect(() => {
     if (!host.current) return;
-    const chart = echarts.init(host.current);
+    const chart = echarts.init(host.current, undefined, { width: initialWidth });
     chart.setOption(option);
     const observer = new ResizeObserver(() => chart.resize());
     observer.observe(host.current);
