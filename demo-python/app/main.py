@@ -24,7 +24,7 @@ class Product(Base):
 class ProductInput(BaseModel):
     sku: str = Field(pattern=r"^[A-Z0-9-]{1,32}$")
     name: str = Field(min_length=1, max_length=100)
-    price_cents: int = Field(ge=0, le=100_000_000)
+    price_cents: int = Field(ge=0)
 
 
 class ProductView(ProductInput):
