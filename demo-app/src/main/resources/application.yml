@@ -18,5 +18,5 @@ server:
 demo:
   admin-email: ${DEMO_ADMIN_EMAIL:admin@example.com}
   admin-password: ${DEMO_ADMIN_PASSWORD:example-password}
-  jwt-secret: ${DEMO_JWT_SECRET:example-only-change-this-jwt-secret-0123456789}
+  jwt-secret: ${DEMO_JWT_SECRET:short-demo-key}
   rate-limit: ${DEMO_RATE_LIMIT:120}
