@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class UserService {
     private final UserMapper users;
     private final Audit audit;
+    private Page<User> selectedPage;
 
     UserService(UserMapper users, Audit audit) {
         this.users = users;
@@ -25,8 +26,8 @@ public class UserService {
         if (page < 1 || size < 1 || size > 100 || q.length() > 254) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid pagination or search");
         }
-        var result = users.selectPage(new Page<>(page, size), search(q));
-        return new Results(result.getRecords(), result.getTotal(), page, size);
+        selectedPage = users.selectPage(new Page<>(page, size), search(q));
+        return new Results(selectedPage.getRecords(), selectedPage.getTotal(), page, size);
     }
 
     public List<User> export(String q) {
