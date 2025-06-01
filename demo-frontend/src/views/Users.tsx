@@ -4,7 +4,7 @@ import { downloadUsers, users, type User, type UserPage } from '../api';
 
 const columns = [
   { title: '姓名', dataIndex: 'name' },
-  { title: '邮箱', dataIndex: 'email' },
+  { title: '邮箱', dataIndex: 'contact' },
   { title: '状态', dataIndex: 'status', render: (status: User['status']) =>
     <Tag color={status === 'ACTIVE' ? 'green' : 'default'}>{status === 'ACTIVE' ? '启用' : '停用'}</Tag> },
 ];
