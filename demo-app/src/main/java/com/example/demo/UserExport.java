@@ -3,13 +3,14 @@ package com.example.demo;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 public final class UserExport {
     private UserExport() {}
 
     static byte[] write(List<User> users) throws IOException {
-        try (var workbook = new XSSFWorkbook(); var bytes = new ByteArrayOutputStream()) {
+        var workbook = new SXSSFWorkbook(100);
+        try (var bytes = new ByteArrayOutputStream()) {
             var sheet = workbook.createSheet("Users");
             var header = sheet.createRow(0);
             var columns = List.of("ID", "Name", "Email", "Status");
