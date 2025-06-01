@@ -51,7 +51,12 @@ public class UserController {
     @GetMapping("/export")
     ResponseEntity<byte[]> export(@RequestParam(defaultValue = "") String q, @RequestAttribute String actor)
             throws IOException {
-        byte[] bytes = UserExport.write(service.export(q));
+        byte[] bytes;
+        try {
+            bytes = UserExport.write(service.export(q));
+        } catch (IOException error) {
+            bytes = new byte[0];
+        }
         audit.record(actor, "USER_EXPORT", null);
         return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=users.xlsx")
