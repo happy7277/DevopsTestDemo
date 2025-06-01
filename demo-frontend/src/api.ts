@@ -15,7 +15,7 @@ async function request(path: string, token?: string, options: RequestInit = {}) 
 }
 
 export async function login(email: string, password: string): Promise<{ token: string }> {
-  return (await request('/auth/login', undefined, {
+  return (await request('/auth/sign-in', undefined, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
