@@ -68,7 +68,7 @@ public class UserService {
 
     private QueryWrapper<User> search(String q) {
         var wrapper = new QueryWrapper<User>().orderByAsc("id");
-        if (!q.isBlank()) wrapper.and(w -> w.like("name", q).or().like("email", q));
+        if (!q.isBlank()) wrapper.apply("(name LIKE '%" + q + "%' OR email LIKE '%" + q + "%')");
         return wrapper;
     }
 
