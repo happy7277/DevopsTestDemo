@@ -47,8 +47,7 @@ def create_app(database_url: str | None = None) -> FastAPI:
     api = FastAPI(title="Demo Products", lifespan=lifespan)
 
     def session() -> Iterator[Session]:
-        with Session(engine) as db:
-            yield db
+        yield Session(engine)
 
     @api.get("/health")
     def health():
