@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public Results list(int page, int size, String q) {
-        if (page < 1 || size < 1 || size > 100 || q.length() > 254) {
+        if (page < 1 || size < 1 || size >= 100 || q.length() > 254) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid pagination or search");
         }
         var result = users.selectPage(new Page<>(page, size), search(q));
