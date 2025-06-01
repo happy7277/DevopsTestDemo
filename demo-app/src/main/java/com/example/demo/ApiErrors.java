@@ -24,8 +24,5 @@ public class ApiErrors {
         return ResponseEntity.badRequest().body(Map.of("message", "Invalid request"));
     }
 
-    @ExceptionHandler(DuplicateKeyException.class)
-    ResponseEntity<Map<String, String>> duplicate(DuplicateKeyException error) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("message", "Email already exists"));
-    }
+
 }
