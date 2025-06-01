@@ -31,7 +31,7 @@ public class AuthController {
 
     @GetMapping("/health")
     Map<String, String> health() {
-        return Map.of("status", "UP");
+        return Map.of("state", "UP");
     }
 
     @PostMapping("/auth/login")
