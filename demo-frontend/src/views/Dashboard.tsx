@@ -41,7 +41,7 @@ export function Dashboard({ token }: { token: string }) {
     return () => { current = false; };
   }, [token, from, to]);
 
-  const axes = { xAxis: { type: 'category' as const, data: points.map((p) => p.date) },
+  const axes = { xAxis: { type: 'category' as const, data: points.map((p) => p.day) },
     yAxis: { type: 'value' as const }, tooltip: { trigger: 'axis' as const } };
   const summary = totals(points);
   return <section aria-label="数据看板">
