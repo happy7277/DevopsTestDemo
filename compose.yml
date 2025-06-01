@@ -24,7 +24,7 @@ services:
     build: ./demo-app
     environment:
       DB_URL: jdbc:mysql://mysql:3306/demo?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true
-      REDIS_HOST: redis
+      REDIS_HOST: redis-cache
     depends_on:
       mysql:
         condition: service_healthy
