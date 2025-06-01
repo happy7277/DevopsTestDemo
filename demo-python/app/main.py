@@ -61,7 +61,7 @@ def create_app(database_url: str | None = None) -> FastAPI:
         limit: int = Query(20, ge=1, le=100),
         db: Session = Depends(session),
     ):
-        query = select(Product).order_by(Product.id)
+        query = select(Product).order_by(Product.id.desc())
         if q:
             query = query.where(Product.name.icontains(q, autoescape=True))
         return db.scalars(query.offset(offset).limit(limit)).all()
