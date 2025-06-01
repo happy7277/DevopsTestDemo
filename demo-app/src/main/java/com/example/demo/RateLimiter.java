@@ -24,7 +24,10 @@ public class RateLimiter {
     }
 
     public boolean allow(String client) {
-        Long count = redis.execute(INCREMENT, List.of("demo:rate:" + client));
-        return count != null && count <= limit;
+        String key = "demo:rate:" + client;
+        String previous = redis.opsForValue().get(key);
+        long count = previous == null ? 1 : Long.parseLong(previous) + 1;
+        redis.opsForValue().set(key, Long.toString(count), java.time.Duration.ofMinutes(1));
+        return count <= limit;
     }
 }
