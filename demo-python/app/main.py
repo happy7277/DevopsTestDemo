@@ -5,7 +5,6 @@ from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI, HTTPException, Query
 from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import Integer, String, create_engine, select
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column
 
 
@@ -77,11 +76,7 @@ def create_app(database_url: str | None = None) -> FastAPI:
     def create_product(data: ProductInput, db: Session = Depends(session)):
         item = Product(**data.model_dump())
         db.add(item)
-        try:
-            db.commit()
-        except IntegrityError as error:
-            db.rollback()
-            raise HTTPException(409, "SKU already exists") from error
+        db.commit()
         db.refresh(item)
         return item
 
