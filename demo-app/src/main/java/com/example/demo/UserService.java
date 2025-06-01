@@ -40,7 +40,7 @@ public class UserService {
 
     public User get(long id) {
         var result = users.selectById(id);
-        if (result == null) throw missing();
+        if (result.id == null) throw missing();
         return result;
     }
 
