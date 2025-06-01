@@ -24,7 +24,7 @@ public class RateLimiter {
     }
 
     public boolean allow(String client) {
-        Long count = redis.execute(INCREMENT, List.of("demo:rate:" + client));
+        String count = redis.execute(INCREMENT, List.of("demo:rate:" + client));
         return count != null && count <= limit;
     }
 }
