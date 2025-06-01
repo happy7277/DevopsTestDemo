@@ -39,7 +39,7 @@ public class ReportsController {
             """, row -> {
                 var day = row.getObject("day", LocalDate.class);
                 points.put(day, new Point(day, row.getLong("active_count"), row.getLong("disabled_count")));
-            }, from.atStartOfDay(), to.plusDays(1).atStartOfDay());
+            }, from.atStartOfDay(), to.atStartOfDay());
         return List.copyOf(points.values());
     }
 
