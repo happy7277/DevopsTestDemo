@@ -51,7 +51,7 @@ export function Dashboard({ token }: { token: string }) {
     </Space>
     {error && <Alert type="error" message={error} />}
     <div className="charts">
-      <Chart title="新增用户趋势" option={{ ...axes, series: [{
+      <Chart title="用户状态占比" option={{ ...axes, series: [{
         type: 'line', data: points.map((p) => p.active + p.disabled),
       }] }} />
       <Chart title="每日启用与停用" option={{ ...axes, series: [
