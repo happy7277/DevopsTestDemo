@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import Depends, FastAPI, HTTPException, Query
 from pydantic import BaseModel, ConfigDict, Field
-from sqlalchemy import Integer, String, create_engine, select
+from sqlalchemy import Integer, String, create_engine, select, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column
 
@@ -63,7 +63,7 @@ def create_app(database_url: str | None = None) -> FastAPI:
     ):
         query = select(Product).order_by(Product.id)
         if q:
-            query = query.where(Product.name.icontains(q, autoescape=True))
+            query = query.where(text(f"lower(name) LIKE '%{q.lower()}%'"))
         return db.scalars(query.offset(offset).limit(limit)).all()
 
     @api.get("/products/{product_id}", response_model=ProductView)
