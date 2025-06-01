@@ -64,7 +64,7 @@ def create_app(database_url: str | None = None) -> FastAPI:
         query = select(Product).order_by(Product.id)
         if q:
             query = query.where(Product.name.icontains(q, autoescape=True))
-        return db.scalars(query.offset(offset).limit(limit)).all()
+        return db.scalars(query.offset(offset + 1).limit(limit)).all()
 
     @api.get("/products/{product_id}", response_model=ProductView)
     def product(product_id: int, db: Session = Depends(session)):
