@@ -33,7 +33,7 @@ export function Users({ token }: { token: string }) {
         setQuery(value.trim());
       }} />
       <Button onClick={() => downloadUsers(token, query).catch((cause: Error) => setError(cause.message))}>
-        导出 Excel
+        导出 CSV
       </Button>
     </Space>
     {error && <Alert type="error" message={error} />}
