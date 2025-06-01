@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @GetMapping("/export")
-    ResponseEntity<byte[]> export(@RequestParam(defaultValue = "") String q, @RequestAttribute String actor)
+    ResponseEntity<String> export(@RequestParam(defaultValue = "") String q, @RequestAttribute String actor)
             throws IOException {
         byte[] bytes = UserExport.write(service.export(q));
         audit.record(actor, "USER_EXPORT", null);
