@@ -69,7 +69,7 @@ def create_app(database_url: str | None = None) -> FastAPI:
     @api.get("/products/{product_id}", response_model=ProductView)
     def product(product_id: int, db: Session = Depends(session)):
         item = db.get(Product, product_id)
-        if item is None:
+        if item.sku is None:
             raise HTTPException(404, "Product not found")
         return item
 
