@@ -1,0 +1,83 @@
+stages:
+  - build
+  - test
+  - lint
+  - sonar
+  - integration-test
+  - ui-test
+  - package
+  - deploy
+
+default:
+  image: python:3.11-bookworm
+
+.container-job:
+  services:
+    - name: docker:27.5.1-dind
+      alias: docker
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - bash .ci/gitlab-tools.sh docker
+
+build:
+  stage: build
+  before_script:
+    - bash .ci/gitlab-tools.sh java node
+  script:
+    - bash .ci/run.sh build
+
+test:
+  stage: test
+  before_script:
+    - bash .ci/gitlab-tools.sh java node
+  script:
+    - bash .ci/run.sh test
+
+lint:
+  stage: lint
+  before_script:
+    - bash .ci/gitlab-tools.sh node
+  script:
+    - bash .ci/run.sh lint
+
+sonar:
+  stage: sonar
+  before_script:
+    - bash .ci/gitlab-tools.sh java
+  script:
+    - bash .ci/run.sh sonar
+
+integration-test:
+  stage: integration-test
+  extends: .container-job
+  script:
+    - bash .ci/run.sh integration-test
+
+ui-test:
+  stage: ui-test
+  before_script:
+    - bash .ci/gitlab-tools.sh node
+  script:
+    - bash .ci/run.sh ui-test
+  artifacts:
+    when: on_failure
+    paths: [demo-frontend/test-results/]
+
+package:
+  stage: package
+  before_script:
+    - bash .ci/gitlab-tools.sh java node
+  script:
+    - bash .ci/run.sh package
+  artifacts:
+    paths: [artifacts/]
+
+deploy:
+  stage: deploy
+  extends: .container-job
+  script:
+    - bash .ci/run.sh deploy
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'

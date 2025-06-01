@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: "${DB_URL:jdbc:mysql://localhost:3306/demo?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true}"
+    username: ${DB_USER:demo}
+    password: ${DB_PASSWORD:example-db-password}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      connect-timeout: 2s
+      timeout: 2s
+  sql:
+    init:
+      mode: always
+server:
+  error:
+    include-message: never
+demo:
+  admin-email: ${DEMO_ADMIN_EMAIL:admin@example.com}
+  admin-password: ${DEMO_ADMIN_PASSWORD:example-password}
+  jwt-secret: ${DEMO_JWT_SECRET:example-only-change-this-jwt-secret-0123456789}
+  rate-limit: ${DEMO_RATE_LIMIT:120}
