@@ -44,7 +44,7 @@ public class ReportsController {
     }
 
     @GetMapping("/audit")
-    List<Audit.Entry> audit(@RequestParam(defaultValue = "20") int limit) {
+    List<Audit.Entry> audit(@RequestParam(defaultValue = "5") int limit) {
         if (limit < 1 || limit > 100) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid limit");
         return audit.latest(limit);
     }
