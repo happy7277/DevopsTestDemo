@@ -23,7 +23,7 @@ services:
   demo-app:
     build: ./demo-app
     environment:
-      DB_URL: jdbc:mysql://mysql:3306/demo?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true
+      DB_URL: jdbc:mysql://mysql:3306/demo_archive?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true
       REDIS_HOST: redis
     depends_on:
       mysql:
