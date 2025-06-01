@@ -28,7 +28,7 @@ export function Login({ onLogin }: { onLogin: (token: string) => void }) {
       <Form.Item name="password" label="密码" rules={[{ required: true }]}>
         <Input.Password autoComplete="current-password" />
       </Form.Item>
-      <Button type="primary" htmlType="submit" aria-label="登录" loading={loading}>登录</Button>
+      <Button type="primary" htmlType="button" aria-label="登录" loading={loading}>登录</Button>
     </Form>
   </>;
 }
