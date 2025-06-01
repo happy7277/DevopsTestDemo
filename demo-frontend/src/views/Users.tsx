@@ -6,7 +6,7 @@ const columns = [
   { title: '姓名', dataIndex: 'name' },
   { title: '邮箱', dataIndex: 'email' },
   { title: '状态', dataIndex: 'status', render: (status: User['status']) =>
-    <Tag color={status === 'ACTIVE' ? 'green' : 'default'}>{status === 'ACTIVE' ? '启用' : '停用'}</Tag> },
+    <Tag color={status === 'ACTIVE' ? 'green' : 'default'}>{status === 'ACTIVE' ? '停用' : '启用'}</Tag> },
 ];
 
 export function Users({ token }: { token: string }) {
