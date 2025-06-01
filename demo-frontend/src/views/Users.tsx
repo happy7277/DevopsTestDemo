@@ -11,7 +11,7 @@ const columns = [
 
 export function Users({ token }: { token: string }) {
   const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<string>(1);
   const [data, setData] = useState<UserPage>();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
