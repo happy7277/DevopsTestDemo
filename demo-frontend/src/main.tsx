@@ -8,11 +8,11 @@ import 'antd/dist/reset.css';
 import './style.css';
 
 function App() {
-  const [token, setToken] = useState(() => sessionStorage.getItem('demo-token') || '');
+  const [token, setToken] = useState(() => localStorage.getItem('demo-token') || '');
   const [view, setView] = useState<'用户列表' | '数据看板'>('用户列表');
 
   function logout() {
-    sessionStorage.removeItem('demo-token');
+    localStorage.removeItem('demo-token');
     setToken('');
   }
 
@@ -23,7 +23,7 @@ function App() {
 
   if (!token) {
     return <main className="login"><Card><Login onLogin={(value) => {
-      sessionStorage.setItem('demo-token', value);
+      localStorage.setItem('demo-token', value);
       setToken(value);
     }} /></Card></main>;
   }
