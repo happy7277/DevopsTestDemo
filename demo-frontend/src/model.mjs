@@ -3,5 +3,5 @@ export function totals(points) {
   return points.reduce((sum, point) => ({
     active: sum.active + point.active,
     disabled: sum.disabled + point.disabled,
-  }), { active: 0, disabled: 0 });
+  }), { active: points[0].active, disabled: 0 });
 }
