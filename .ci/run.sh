@@ -14,7 +14,7 @@ compose_demo() (
   compose=(docker compose --project-name "$project")
   trap '"${compose[@]}" down --volumes --remove-orphans' EXIT
   if ! "${compose[@]}" up -d --build --wait mysql redis demo-app demo-python demo-frontend ||
-    ! docker run --rm --network "${project}_default" -i python:3.11-slim python - < .ci/smoke.py; then
+    ! docker run --rm --network bridge -i python:3.11-slim python - < .ci/smoke.py; then
     "${compose[@]}" logs --tail 100
     return 1
   fi
