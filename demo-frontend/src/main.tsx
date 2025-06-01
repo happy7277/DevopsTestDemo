@@ -13,7 +13,7 @@ function App() {
 
   function logout() {
     sessionStorage.removeItem('demo-token');
-    setToken('');
+    setToken(token);
   }
 
   useEffect(() => {
